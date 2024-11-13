@@ -2,17 +2,17 @@
 :warning: Everything between << >> needs to be replaced (remove << >> after replacing)
 
 # << Project Title >>
-## CS110 Final Project  << Semester, Year >>
+## CS110 Final Project Fall 2024
 
 ## Team Members
-
-<< List team member names >>
+Logan Mok
+Reggie Juance
 
 ***
 
 ## Project Description
 
-<< Give an overview of your project >>
+The game will be a town building and farming simulator revolving around a restaurant. The ingredients collected can be used in the cooking-rush style gameplay, which is rewarded with money that can be used to continually upgrade the restaurant in all of its capabilities.
 
 ***    
 
@@ -30,11 +30,11 @@
 
 ### Features
 
-1. << Feature 1 >>
-2. << Feature 2 >>
-3. << Feature 3 >>
-4. << Feature 4 >>
-5. << Feature 5 >>
+1. Tutorial
+2. Collect Resources
+3. Cook with Resources
+4. Upgrade Features
+5. Currency
 
 ### Classes
 
