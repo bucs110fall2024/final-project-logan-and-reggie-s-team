@@ -28,6 +28,10 @@ The game will be a town building and farming simulator revolving around a restau
 
 ## Program Design
 
+Classes
+    - Building: creates the buildings in the town
+    - Button: create a button for building actions
+
 ### Features
 
 1. Tutorial
