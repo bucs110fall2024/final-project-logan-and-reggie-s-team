@@ -1,23 +1,81 @@
 {
-    "object_type" : ["beef", "pan"],
+    "object_type" : ["noodles", "vegetables", "rice", "eggs", "plate", "pan"],
     "indv_object" : {
-        "beef1" : "",
+        "noodles1" : "",
+        "vegetables1" : "",
+        "rice1" : "",
+        "eggs1" : "",
+        "plate1" : "",
+        "plate2" : "",
+        "plate3" : "",
+        "plate4" : "",
         "pan1" : "",
         "pan2" : "",
         "pan3" : "",
         "pan4" : ""
     },
-    "beef" : {
+    "noodles" : {
         "size" : {
             "scale" : 0.1,
             "width" : "",
             "height" : ""
         },
-        "image" : "assets/fp_images/beef.png",
+        "image" : "assets/fp_images/noodles.png",
         "pos" : {
             "1" : [400, 200]
         },
         "amount" : 1
+    },
+    "vegetables" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/vegetables.png",
+        "pos" : {
+            "1" : [600, 200]
+        },
+        "amount" : 1
+    },
+    "rice" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/rice.png",
+        "pos" : {
+            "1" : [400, 100]
+        },
+        "amount" : 1
+    },
+    "eggs" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/eggs.png",
+        "pos" : {
+            "1" : [600, 100]
+        },
+        "amount" : 1
+    },
+    "plate" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/plate.png",
+        "pos" : {
+            "1" : [150, 200],
+            "2" : [200, 200],
+            "3" : [150, 100],
+            "4" : [200, 100]
+        },
+        "amount" : 4
     },
     "pan" : {
         "size" : {
@@ -27,15 +85,20 @@
         },
         "image" : "assets/fp_images/pan.png",
         "pos" : {
-            "1" : [100, 200],
-            "2" : [200, 200],
-            "3" : [100, 100],
-            "4" : [200, 100]
+            "1" : [50, 200],
+            "2" : [100, 200],
+            "3" : [50, 100],
+            "4" : [100, 100]
         },
         "amount" : 4
     },
     
-    "pan_food" : ["beef", "meat", "noodle", "rice", "vegetable"],
-    "grill_food" : ["bread", "bun", "cheese", "patty"],
-    "deep_fry_food" : ["chicken", "potato"]
+    "required" : {
+        "noodles" : "None",
+        "vegetables" : "noodles",
+        "rice" : "None",
+        "eggs" : "rice"
+    },
+    "pan_food" : ["noodles1", "vegetables1", "rice1", "eggs1"]
+    
 }

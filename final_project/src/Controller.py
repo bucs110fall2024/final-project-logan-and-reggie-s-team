@@ -32,6 +32,10 @@ class Controller():
 
     def kitchenloop(self):
     
+        background = pygame.image.load("assets/fp_images/background.png")
+        background = pygame.transform.scale(background, (screen_width, screen_height))
+        self.screen.blit(background, (0,0))
+
         for object in self.object_type:
             for i in range(self.data[object]["amount"]):
                 name = f"{object}{i+1}"
@@ -40,9 +44,24 @@ class Controller():
 
         while self.state == "KITCHEN":
    
-            if self.indv_object["beef1"].draw(self.screen):
-                self.indv_object["beef1"].cook(self.data, self.indv_object, "pan", self.screen)
-                print("clicked")
+            for food in self.data["pan_food"]:
+                if food == "noodles1" and self.indv_object[food].draw(self.screen):
+                    self.indv_object[food].cook(self.data, self.indv_object, "noodles", "pan", self.screen)
+                    print("clicked")
+                if food == "vegetables1" and self.indv_object[food].draw(self.screen):
+                    self.indv_object[food].cook(self.data, self.indv_object, "vegetables", "pan", self.screen)
+                    print("clicked")
+            for food in self.data["pan_food"]:
+                if food == "rice1" and self.indv_object[food].draw(self.screen):
+                    self.indv_object[food].cook(self.data, self.indv_object, "rice", "pan", self.screen)
+                    print("clicked")
+            for food in self.data["pan_food"]:
+                if food == "eggs1" and self.indv_object[food].draw(self.screen):
+                    self.indv_object[food].cook(self.data, self.indv_object, "eggs", "pan", self.screen)
+                    print("clicked")
+
+            for pan in self.data["indv_object"]:
+                pass
 
             
             
