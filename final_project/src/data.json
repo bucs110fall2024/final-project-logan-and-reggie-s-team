@@ -1,0 +1,41 @@
+{
+    "object_type" : ["beef", "pan"],
+    "indv_object" : {
+        "beef1" : "",
+        "pan1" : "",
+        "pan2" : "",
+        "pan3" : "",
+        "pan4" : ""
+    },
+    "beef" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/beef.png",
+        "pos" : {
+            "1" : [400, 200]
+        },
+        "amount" : 1
+    },
+    "pan" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/pan.png",
+        "pos" : {
+            "1" : [100, 200],
+            "2" : [200, 200],
+            "3" : [100, 100],
+            "4" : [200, 100]
+        },
+        "amount" : 4
+    },
+    
+    "pan_food" : ["beef", "meat", "noodle", "rice", "vegetable"],
+    "grill_food" : ["bread", "bun", "cheese", "patty"],
+    "deep_fry_food" : ["chicken", "potato"]
+}
