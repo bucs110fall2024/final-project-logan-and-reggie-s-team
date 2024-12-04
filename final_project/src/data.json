@@ -2,14 +2,30 @@
     "object_type" : ["noodles", "vegetables", "rice", "eggs", "pan"],
     "indv_object" : {},
     "clone_image" :{
-        "pan1food1" : [0, 0, 0, 0],
-        "pan1food2" : [0, 0, 0, 0],
-        "pan2food1" : [0, 0, 0, 0],
-        "pan2food2" : [0, 0, 0, 0],
-        "pan3food1" : [0, 0, 0, 0],
-        "pan3food2" : [0, 0, 0, 0],
-        "pan4food1" : [0, 0, 0, 0],
-        "pan4food2" : [0, 0, 0, 0]
+        "pan1food1" : {
+            "rect" : [0, 0, 0, 0]
+        },
+        "pan1food2" : {
+            "rect" : [0, 0, 0, 0]
+        },
+        "pan2food1" : {
+            "rect" : [0, 0, 0, 0]
+        },
+        "pan2food2" : {
+            "rect" : [0, 0, 0, 0]
+        },
+        "pan3food1" : {
+            "rect" : [0, 0, 0, 0]
+        },
+        "pan3food2" : {
+            "rect" : [0, 0, 0, 0]
+        },
+        "pan4food1" : {
+            "rect" : [0, 0, 0, 0]
+        },
+        "pan4food2" : {
+            "rect" : [0, 0, 0, 0]
+        }
     },
     "noodles" : {
         "size" : {
