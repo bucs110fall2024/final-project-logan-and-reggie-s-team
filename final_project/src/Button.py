@@ -1,12 +1,8 @@
 import pygame
 
-pan_food = ["beef", "meat", "noodle", "rice", "vegetable"]
-grill_food = ["bread", "bun", "cheese", "patty"]
-deep_fry_food = ["chicken", "potato"]
-
 class Button():
 
-    def __init__(self, x, y, scale, type, image):
+    def __init__(self, x, y, scale, type, image, screen):
         
         self.image = pygame.image.load(image).convert_alpha()
         self.scale = scale
@@ -18,6 +14,8 @@ class Button():
         self.type = type
         self.clicked = False
         self.available = True
+        screen.blit(self.image, (self.rect.x, self.rect.y))
+
 
     def draw(self, screen):
         state = False
@@ -29,7 +27,6 @@ class Button():
                 state = True
         if pygame.mouse.get_pressed()[0] == False:
             self.clicked = False
-        screen.blit(self.image, (self.rect.x, self.rect.y))
 
         return state
     

@@ -1,0 +1,20 @@
+{
+    "beef" : {
+        "scale" : 0.1,
+        "image" : "assets/fp_images/beef.png",
+        "pos" : [400, 200]
+    },
+
+    "pan" : {
+        "scale" : 0.1,
+        "image" : "assets/fp_images/pan.png",
+        "1pos" : [100, 200],
+        "2pos" : [200, 200],
+        "3pos" : [100, 100],
+        "4pos" : [200, 100]
+    },
+    
+    "pan_food" : ["beef", "meat", "noodle", "rice", "vegetable"],
+    "grill_food" : ["bread", "bun", "cheese", "patty"],
+    "deep_fry_food" : ["chicken", "potato"]
+}
