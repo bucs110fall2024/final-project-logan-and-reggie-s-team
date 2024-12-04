@@ -4,25 +4,24 @@ import json
 
 screen_width = 800
 screen_height = 450
-# scale = {
-#     "pan" : [screen_width * 0.1, screen_height * 0.1],
-#     "beef" : [screen_width * 0.1, screen_height * 0.1],
-
-#     }
-data_json = open("data.json", "r")
-dict_data = json.loads(data_json.read())
-data_json.close()
-print(dict_data)
 
 class Controller():
 
     def __init__(self):
 
-        
         self.screen = pygame.display.set_mode((screen_width, screen_height))
         self.screen.fill((255, 255, 255))
         self.width, self.height = pygame.display.get_window_size()
         self.state = "KITCHEN"
+
+        self.data_json = open("src/data.json", "r")
+        self.data = json.loads(self.data_json.read())
+        self.data_json.close()
+        self.object_type = self.data["object_type"]
+        self.indv_object = self.data["indv_object"]
+        for object in self.object_type:
+            self.data[object]["size"]["width"] = self.data[object]["size"]["scale"] * screen_width
+            self.data[object]["size"]["height"] = self.data[object]["size"]["scale"] * screen_height
 
     def mainloop(self):
        
@@ -33,29 +32,19 @@ class Controller():
 
     def kitchenloop(self):
     
-        # beef = Button(400, 200, scale["beef"], "beef", "assets/fp_images/beef.png", self.screen)
-        # pan1 = Button(100, 200, scale["pan"], "pan", "assets/fp_images/pan.png", self.screen)
-        # pan2 = Button(200, 200, scale["pan"], "pan", "assets/fp_images/pan.png", self.screen)
-        # pan3 = Button(100, 100, scale["pan"], "pan", "assets/fp_images/pan.png", self.screen)
-        # pan4 = Button(200, 100, scale["pan"], "pan", "assets/fp_images/pan.png", self.screen)
+        for object in self.object_type:
+            for i in range(self.data[object]["amount"]):
+                name = f"{object}{i+1}"
+                model = Button(self.data[object]["pos"][f"{i+1}"][0],self.data[object]["pos"][f"{i+1}"][1],self.data[object]["size"]["width"],self.data[object]["size"]["height"],self.data[object]["image"],self.screen)
+                self.indv_object[name] = model
 
         while self.state == "KITCHEN":
    
-            #if beef.draw(self.screen):
-                # if pan1.available:
-                #     beef.cook(pan1.rect.topleft, scale["pan"], "assets/fp_images/beef.png", self.screen)
-                #     pan1.available = False
-                # elif pan2.available:
-                #     beef.cook(pan2.rect.topleft, scale["pan"], "assets/fp_images/beef.png", self.screen)
-                #     pan2.available = False           
-                # elif pan3.available:
-                #     beef.cook(pan3.rect.topleft, scale["pan"], "assets/fp_images/beef.png", self.screen)
-                #     pan3.available = False               
-                # elif pan4.available:
-                #     beef.cook(pan4.rect.topleft, scale["pan"], "assets/fp_images/beef.png", self.screen)
-                #     pan4.available = False
-                # print("clicked")
+            if self.indv_object["beef1"].draw(self.screen):
+                self.indv_object["beef1"].cook(self.data, self.indv_object, "pan", self.screen)
+                print("clicked")
 
+            
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

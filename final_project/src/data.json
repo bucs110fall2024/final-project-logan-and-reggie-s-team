@@ -1,17 +1,38 @@
 {
-    "beef" : {
-        "scale" : 0.1,
-        "image" : "assets/fp_images/beef.png",
-        "pos" : [400, 200]
+    "object_type" : ["beef", "pan"],
+    "indv_object" : {
+        "beef1" : "",
+        "pan1" : "",
+        "pan2" : "",
+        "pan3" : "",
+        "pan4" : ""
     },
-
+    "beef" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/beef.png",
+        "pos" : {
+            "1" : [400, 200]
+        },
+        "amount" : 1
+    },
     "pan" : {
-        "scale" : 0.1,
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
         "image" : "assets/fp_images/pan.png",
-        "1pos" : [100, 200],
-        "2pos" : [200, 200],
-        "3pos" : [100, 100],
-        "4pos" : [200, 100]
+        "pos" : {
+            "1" : [100, 200],
+            "2" : [200, 200],
+            "3" : [100, 100],
+            "4" : [200, 100]
+        },
+        "amount" : 4
     },
     
     "pan_food" : ["beef", "meat", "noodle", "rice", "vegetable"],
