@@ -1,18 +1,15 @@
 {
-    "object_type" : ["noodles", "vegetables", "rice", "eggs", "plate", "pan"],
-    "indv_object" : {
-        "noodles1" : "",
-        "vegetables1" : "",
-        "rice1" : "",
-        "eggs1" : "",
-        "plate1" : "",
-        "plate2" : "",
-        "plate3" : "",
-        "plate4" : "",
-        "pan1" : "",
-        "pan2" : "",
-        "pan3" : "",
-        "pan4" : ""
+    "object_type" : ["noodles", "vegetables", "rice", "eggs", "pan"],
+    "indv_object" : {},
+    "clone_image" :{
+        "pan1food1" : [0, 0, 0, 0],
+        "pan1food2" : [0, 0, 0, 0],
+        "pan2food1" : [0, 0, 0, 0],
+        "pan2food2" : [0, 0, 0, 0],
+        "pan3food1" : [0, 0, 0, 0],
+        "pan3food2" : [0, 0, 0, 0],
+        "pan4food1" : [0, 0, 0, 0],
+        "pan4food2" : [0, 0, 0, 0]
     },
     "noodles" : {
         "size" : {
@@ -24,7 +21,8 @@
         "pos" : {
             "1" : [400, 200]
         },
-        "amount" : 1
+        "amount" : 1,
+        "order" : 1
     },
     "vegetables" : {
         "size" : {
@@ -36,7 +34,8 @@
         "pos" : {
             "1" : [600, 200]
         },
-        "amount" : 1
+        "amount" : 1,
+        "order" : 2
     },
     "rice" : {
         "size" : {
@@ -48,7 +47,8 @@
         "pos" : {
             "1" : [400, 100]
         },
-        "amount" : 1
+        "amount" : 1,
+        "order" : 1
     },
     "eggs" : {
         "size" : {
@@ -60,7 +60,8 @@
         "pos" : {
             "1" : [600, 100]
         },
-        "amount" : 1
+        "amount" : 1,
+        "order" : 2
     },
     "plate" : {
         "size" : {
@@ -70,12 +71,10 @@
         },
         "image" : "assets/fp_images/plate.png",
         "pos" : {
-            "1" : [150, 200],
-            "2" : [200, 200],
-            "3" : [150, 100],
-            "4" : [200, 100]
+            "1" : [150, 200]
         },
-        "amount" : 4
+        "amount" : 1,
+        "order" : "None"
     },
     "pan" : {
         "size" : {
@@ -86,11 +85,12 @@
         "image" : "assets/fp_images/pan.png",
         "pos" : {
             "1" : [50, 200],
-            "2" : [100, 200],
+            "2" : [150, 200],
             "3" : [50, 100],
-            "4" : [100, 100]
+            "4" : [150, 100]
         },
-        "amount" : 4
+        "amount" : 4,
+        "order" : "None"
     },
     
     "required" : {

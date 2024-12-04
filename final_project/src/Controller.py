@@ -22,6 +22,7 @@ class Controller():
         for object in self.object_type:
             self.data[object]["size"]["width"] = self.data[object]["size"]["scale"] * screen_width
             self.data[object]["size"]["height"] = self.data[object]["size"]["scale"] * screen_height
+        self.clone = []
 
     def mainloop(self):
        
@@ -39,32 +40,22 @@ class Controller():
         for object in self.object_type:
             for i in range(self.data[object]["amount"]):
                 name = f"{object}{i+1}"
-                model = Button(self.data[object]["pos"][f"{i+1}"][0],self.data[object]["pos"][f"{i+1}"][1],self.data[object]["size"]["width"],self.data[object]["size"]["height"],self.data[object]["image"],self.screen)
+                model = Button(self.data, object, i, self.screen)
+
                 self.indv_object[name] = model
 
 
         while self.state == "KITCHEN":
             
             for food in self.data["pan_food"]:
-                if food == "noodles1" and self.indv_object[food].click():
-                    self.indv_object[food].cook(self.data, self.indv_object, "noodles", "pan", self.screen)
-                    print("clicked")
-                if food == "vegetables1" and self.indv_object[food].click():
-                    self.indv_object[food].cook(self.data, self.indv_object, "vegetables", "pan", self.screen)
-                
-                    print("clicked")
+                if self.indv_object[food].click():
+                    self.indv_object[food].cook(self.data, self.indv_object, self.indv_object[food].type, "pan", self.screen)
+                    print(f"{food} clicked")
 
-
-                # if food == "rice1" and self.indv_object[food].click():
-                #     self.indv_object[food].cook(self.data, self.indv_object, "rice", "pan", self.screen)
-                #     print("clicked")
-                # if food == "eggs1" and self.indv_object[food].click():
-                #     self.indv_object[food].cook(self.data, self.indv_object, "eggs", "pan", self.screen)
-                #     print("clicked")
-
-            # for pan in self.data["pans"]:
-            #     if self.indv_object[pan].rect.colliderect()
-
+            for pan in self.data["pans"]:
+                if self.indv_object[pan].click() and len(self.indv_object[pan].rect.collidelistall([self.data["clone_image"][f"{pan}food1"],self.data["clone_image"][f"{pan}food2"]])) == 2:
+                    self.indv_object[pan].plate()
+                    print(f"{pan} clicked")
             
             
             for event in pygame.event.get():
