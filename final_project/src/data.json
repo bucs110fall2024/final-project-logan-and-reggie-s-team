@@ -99,6 +99,6 @@
         "rice" : "None",
         "eggs" : "rice"
     },
-    "pan_food" : ["noodles1", "vegetables1", "rice1", "eggs1"]
-    
+    "pan_food" : ["noodles1", "vegetables1", "rice1", "eggs1"],
+    "pans" : ["pan1", "pan2", "pan3", "pan4"]
 }

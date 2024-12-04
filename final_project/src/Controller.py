@@ -42,26 +42,28 @@ class Controller():
                 model = Button(self.data[object]["pos"][f"{i+1}"][0],self.data[object]["pos"][f"{i+1}"][1],self.data[object]["size"]["width"],self.data[object]["size"]["height"],self.data[object]["image"],self.screen)
                 self.indv_object[name] = model
 
+
         while self.state == "KITCHEN":
-   
+            
             for food in self.data["pan_food"]:
-                if food == "noodles1" and self.indv_object[food].draw(self.screen):
+                if food == "noodles1" and self.indv_object[food].click():
                     self.indv_object[food].cook(self.data, self.indv_object, "noodles", "pan", self.screen)
                     print("clicked")
-                if food == "vegetables1" and self.indv_object[food].draw(self.screen):
+                if food == "vegetables1" and self.indv_object[food].click():
                     self.indv_object[food].cook(self.data, self.indv_object, "vegetables", "pan", self.screen)
-                    print("clicked")
-            for food in self.data["pan_food"]:
-                if food == "rice1" and self.indv_object[food].draw(self.screen):
-                    self.indv_object[food].cook(self.data, self.indv_object, "rice", "pan", self.screen)
-                    print("clicked")
-            for food in self.data["pan_food"]:
-                if food == "eggs1" and self.indv_object[food].draw(self.screen):
-                    self.indv_object[food].cook(self.data, self.indv_object, "eggs", "pan", self.screen)
+                
                     print("clicked")
 
-            for pan in self.data["indv_object"]:
-                pass
+
+                # if food == "rice1" and self.indv_object[food].click():
+                #     self.indv_object[food].cook(self.data, self.indv_object, "rice", "pan", self.screen)
+                #     print("clicked")
+                # if food == "eggs1" and self.indv_object[food].click():
+                #     self.indv_object[food].cook(self.data, self.indv_object, "eggs", "pan", self.screen)
+                #     print("clicked")
+
+            # for pan in self.data["pans"]:
+            #     if self.indv_object[pan].rect.colliderect()
 
             
             

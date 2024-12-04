@@ -12,7 +12,7 @@ class Button():
         self.available = "None"
         screen.blit(self.image, (self.rect.x, self.rect.y))
 
-    def draw(self, screen):
+    def click(self):
         state = False
         pos = pygame.mouse.get_pos()
         if self.rect.collidepoint(pos):
@@ -44,5 +44,5 @@ class Button():
             objects[f"{app}4"].new_image(objects[f"{app}4"].rect.topleft, data[f"{app}"]["size"]["width"], data[f"{app}"]["size"]["height"], data[food]["image"], screen)
             objects[f"{app}4"].available = f"{food}"
         
-    def plate(self, data, objects, screen):
-        pass
+
+
