@@ -1,6 +1,3 @@
-
-:warning: Everything between << >> needs to be replaced (remove << >> after replacing)
-
 # Project Title: Restaurant Simulator
 ## CS110 Final Project Fall 2024
 
@@ -25,13 +22,9 @@ The game will consist of varying ingredients andrecipes for the user to create, 
 ### Final Design
 
 ![final gui](assets/finalgui.jpg)
+(assets/fp_images/start_screen.png)
 
 ## Program Design
-
-Classes
-    - Building: creates the buildings in the town
-    - Button: create a button for building actions
-    - Customer: creates a customer and order
 
 ### Features
 
@@ -42,9 +35,9 @@ Classes
 5. Random Customer Order
 
 ### Classes
-
-- << You should have a list of each of your classes with a description >>
-
+    - Button: create a general button to be clicked
+    - Customer: creates a customer and order
+    
 ## ATP
 Test Case 1: Ingredient
 **Test Description:**  
