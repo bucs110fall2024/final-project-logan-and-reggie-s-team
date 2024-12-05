@@ -68,8 +68,10 @@ class Controller():
         for i in range(1, 4):
             customer = Customer(self.data, i)
             self.customers.append(customer)
+        
+        recipe = ""
 
-        serving = []
+        orders = []
 
         while self.state == "KITCHEN":
             
@@ -88,7 +90,7 @@ class Controller():
 
             #test if any of the appliances are clicked and have the required amount of ingredients
             for app in self.data["appliances"]:
-                recipe = ""
+                #recipe = ""
                 if self.data["objects"][app].click() and len(self.data["objects"][app].rect.collidelistall([self.data["clone_image"][f"{app}food1"], self.data["clone_image"][f"{app}food2"]])) == self.data[app]["ing_num"]:
                     
                     #if recipe has 2 ingredients
@@ -110,42 +112,53 @@ class Controller():
                             recipe = f"{self.data[f"{app}_food"][-1]}"
                             self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]] = 0
                 
-                    #hides ingredients by putting background back on but it doesnt remove the rectangles or surfaces
+                    #"serves" product
                     if self.data["objects"][app].available == "Full":
                         self.screen.blit(self.background, (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1]), (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1], self.data[app]["size"]["width"], self.data[app]["size"]["height"]))
                         self.data["objects"][app].available = "Empty"
-                        print(self.data["objects"][app].available)
-                        print(f"{app} emptied")
-                    
+                        
+                        for i in range(1, 4):
+                            if f"cooked_{recipe}{i}" in orders:
+                                orders.remove(f"cooked_{recipe}{i}")
+                                break
+                        print(orders)
+
+                        recipe = ""
+
+                    #hides ingredients by putting background back on
                     elif recipe:
                         surface = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
                         surface.fill((0,0,0,0))
                         self.screen.blit(self.background, (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1]), (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1], self.data[app]["size"]["width"], self.data[app]["size"]["height"]))
                         self.data["objects"][f"{app}"].new_image(self.data[app]["size"]["width"], self.data[app]["size"]["height"], f"assets/fp_images/cooked_{recipe}.png", surface)
                         self.screen.blit(surface, (0,0))
-                        serving.append(recipe)
                         self.data["objects"][app].available = "Full"
-                        print(recipe)
-                        
-                    # elif self.data["objects"][app].available == "Full":
-                    #     self.screen.blit(self.background, (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1]), (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1], self.data[app]["size"]["width"], self.data[app]["size"]["height"]))
-                    #     self.data["objects"][app].available = "Empty"
-                    #     print(self.data["objects"][app].available)
-                    #     print(f"{app} emptied")
                     
 
-
             for cus in self.customers:
+                #when no customer
                 if cus.waiting:
                     surface = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
                     surface.fill((0,0,0,0))
+                    cus.new_order()
                     cus.new_cus(surface)
                     self.screen.blit(surface, (0,0))
-                
-                if cus.order in serving:
-                    pass
+                    orders.append(f"{cus.order}{cus.num}")
+                    print(cus.order)
 
-                
+                #when customer is served
+                if not(f"{cus.order}{cus.num}" in orders) and not(cus.waiting):
+                    surface = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
+                    surface.fill((0,0,0,0))
+                    self.screen.blit(self.background, (cus.order_x, cus.y), (cus.order_x, cus.y, self.data["customer"]["size"]["width"]*2, self.data["customer"]["size"]["height"]))
+
+                    #cus.clock.tick()
+                    pygame.time.wait(cus.time_btwn_cus)
+                    cus.served()
+
+                # if cus.clock == cus.time_btwn_cus:
+                #     cus.served()
+                #     cus.clock = 0
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
