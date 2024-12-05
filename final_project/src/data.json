@@ -1,12 +1,122 @@
 {
     "objects" : {
+        "pan" : "",
+        "grill" : "",
+        "fryer" : "",
         "noodles" : "",
         "vegetables" : "",
-        "pan" : ""
+        "rice" : "",
+        "eggs" : "",
+        "buns" : "",
+        "patty" : "",
+        "bread" : "",
+        "cheese" : "",
+        "tenders" : "",
+        "potato" : ""
+    },
+    "required" : {
+        "noodles" : "None",
+        "vegetables" : "noodles",
+        "rice" : "None",
+        "eggs" : "rice",
+        "buns" : "None",
+        "patty" : "buns",
+        "bread" : "None",
+        "cheese" : "bread",
+        "tenders" : "None",
+        "potato" : "None"
     },
     "clone_image" :{
         "panfood1" : [0, 0, 0, 0],
-        "panfood2" : [0, 0, 0, 0]
+        "panfood2" : [0, 0, 0, 0],
+        "grillfood1" : [0, 0, 0, 0],
+        "grillfood2" : [0, 0, 0, 0],
+        "fryerfood1" : [0, 0, 0, 0],
+        "fryerfood2" : [0, 0, 0, 0]
+    },
+    "appliances" : ["pan", "grill", "fryer"],
+    "pan_food" : ["noodles", "vegetables", "rice", "eggs", "stir_fry", "fried_rice"],
+    "grill_food" : ["buns", "patty", "bread", "cheese", "burger", "grilled_cheese"],
+    "fryer_food" : ["tenders", "potato", "tenders", "fries"],
+
+    "pan" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "rel_pos" : [0.42, 0.56],
+        "act_pos" : [],
+        "order" : "None",
+        "ing_num" : 2,
+        "recipes" : {
+            "stir_fry" : {
+                "ing" : {
+                    "noodles" : 0,
+                    "vegetables" : 0
+                },
+                "image" : "assets/fp_images/cooked_noodles.png"
+            },
+            "fried_rice" : {
+                "ing" : {
+                    "rice" : 0,
+                    "eggs" : 0
+                },
+                "image" : "assets/fp_images/cooked_rice.png"
+            }
+        }
+    },
+    "grill" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "rel_pos" : [0.78, 0.56],
+        "act_pos" : [],
+        "order" : "None",
+        "ing_num" : 2,
+        "recipes" : {
+            "burger" : {
+                "ing" : {
+                    "buns" : 0,
+                    "patty" : 0
+                },
+                "image" : "assets/fp_images/cooked_burger.png"
+            },
+            "grilled_cheese" : {
+                "ing" : {
+                    "bread" : 0,
+                    "cheese" : 0
+                },
+                "image" : "assets/fp_images/cooked_grilled_cheese.png"
+            }
+        }
+    },
+    "fryer" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "rel_pos" : [0.10, 0.54],
+        "act_pos" : [],
+        "order" : "None",
+        "ing_num" : 1,
+        "recipes" : {
+            "tenders" : {
+                "ing" : {
+                    "tenders" : 0
+                },
+                "image" : "assets/fp_images/cooked_tenders.png"
+            },
+            "fries" : {
+                "ing" : {
+                    "potato" : 0
+                },
+                "image" : "assets/fp_images/cooked_fries.png"
+            }
+        }
     },
     "noodles" : {
         "size" : {
@@ -15,9 +125,10 @@
             "height" : ""
         },
         "image" : "assets/fp_images/noodles.png",
-        "rel_pos" : [0.7,0.75],
+        "rel_pos" : [0.73,0.78],
         "act_pos" : [],
-        "order" : 1
+        "order" : 1,
+        "recipe" : "stir_fry"
     },
     "vegetables" : {
         "size" : {
@@ -25,10 +136,11 @@
             "width" : "",
             "height" : ""
         },
-        "image" : "assets/fp_images/vegetables.png",
-        "rel_pos" : [0.5, 0.9],
+        "image" : "assets/fp_images/chopped_peppers.png",
+        "rel_pos" : [0.46, 0.9],
         "act_pos" : [],
-        "order" : 2
+        "order" : 2,
+        "recipe" : "stir_fry"
     },
     "rice" : {
         "size" : {
@@ -37,9 +149,10 @@
             "height" : ""
         },
         "image" : "assets/fp_images/rice.png",
-        "rel_pos" : [],
+        "rel_pos" : [0.9, 0.78],
         "act_pos" : [],
-        "order" : 1
+        "order" : 1,
+        "recipe" : "fried_rice"
     },
     "eggs" : {
         "size" : {
@@ -48,40 +161,82 @@
             "height" : ""
         },
         "image" : "assets/fp_images/eggs.png",
-        "rel_pos" : [],
+        "rel_pos" : [0.03, 0.9],
         "act_pos" : [],
-        "order" : 2
+        "order" : 2,
+        "recipe" : "fried_rice"
     },
-    "plate" : {
+    "buns" : {
         "size" : {
             "scale" : 0.1,
             "width" : "",
             "height" : ""
         },
-        "image" : "assets/fp_images/plate.png",
-        "rel_pos" : [],
+        "image" : "assets/fp_images/buns.png",
+        "rel_pos" : [0.55, 0.78],
         "act_pos" : [],
-        "order" : "None"
+        "order" : 1,
+        "recipe" : "burger"
     },
-    "pan" : {
+    "patty" : {
         "size" : {
             "scale" : 0.1,
             "width" : "",
             "height" : ""
         },
-        "image" : "assets/fp_images/pan.png",
-        "rel_pos" : [0.5, 0.6],
+        "image" : "assets/fp_images/raw_patty.png",
+        "rel_pos" : [0.17, 0.78],
         "act_pos" : [],
-        "order" : "None",
-        "ing_num" : 2
+        "order" : 2,
+        "recipe" : "burger"
     },
-    
-    "required" : {
-        "noodles" : "None",
-        "vegetables" : "noodles",
-        "rice" : "None",
-        "eggs" : "rice"
+    "bread" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/bread.png",
+        "rel_pos" : [0.38, 0.78],
+        "act_pos" : [],
+        "order" : 1,
+        "recipe" : "grilled_cheese"
+
     },
-    "appliances" : ["pan"],
-    "pan_food" : ["noodles", "vegetables"]
+    "cheese" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/cheese.png",
+        "rel_pos" : [0.21, 0.9],
+        "act_pos" : [],
+        "order" : 2,
+        "recipe" : "grilled_cheese"
+    },
+    "tenders" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/tenders.png",
+        "rel_pos" : [0.03, 0.78],
+        "act_pos" : [],
+        "order" : 1,
+        "recipe" : "tenders"
+    },
+    "potato" : {
+        "size" : {
+            "scale" : 0.1,
+            "width" : "",
+            "height" : ""
+        },
+        "image" : "assets/fp_images/uncooked_fries.png",
+        "rel_pos" : [0.82, 0.9],
+        "act_pos" : [],
+        "order" : 1,
+        "recipe" : "fries"
+    }
 }

@@ -60,21 +60,40 @@ class Controller():
         while self.state == "KITCHEN":
             
             #tests if any of the pan ingredients are clicked then puts them on the pan
-            for food in self.data["pan_food"]:
-                if self.objects[food].click():
-                    self.objects[food].cook(self.data, self.objects[food].type, "pan", self.surface)
-                    self.screen.blit(self.surface, (0,0))
-                    print(f"{food} clicked")
+            for app in self.data["appliances"]:
+                for food in self.data[f"{app}_food"][0:-2]:
+                    if self.objects[food].click():
+                        self.objects[food].cook(self.data, self.objects[food].type, app, self.surface)
+                        self.screen.blit(self.surface, (0,0))
+                        self.data[app]["recipes"][self.data[food]["recipe"]]["ing"][food] = 1
+                        print(f"{food} clicked")
 
             #test if any of the appliances are clicked and have the required amount of ingredients
             for app in self.data["appliances"]:
+                image = ""
                 if self.data["objects"][app].click() and len(self.data["objects"][app].rect.collidelistall([self.data["clone_image"][f"{app}food1"], self.data["clone_image"][f"{app}food2"]])) == self.data[app]["ing_num"]:
+                    #if recipe has 2 ingredients
+                    if self.data[app]["ing_num"] == 2:
+                        if self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]] and self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][1]]:
+                            image = f"{self.data[f"{app}_food"][-2]}"
+                            self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][1]] = 0
+                            self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][2]] = 0
+                        elif self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][2]] and self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][3]]:
+                            image = f"{self.data[f"{app}_food"][-1]}"
+                            self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][1]] = 0
+                            self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][2]] = 0
+                    #if recipe has 1 ingredient
+                    elif self.data[app]["ing_num"] == 1:
+                        if self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]]:
+                            image = f"{self.data[f"{app}_food"][-2]}"
+                        elif self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][1]]:
+                            image = f"{self.data[f"{app}_food"][-1]}"
+                
                     #hides ingredients by putting background back on but it doesnt remove the rectangles or surfaces
                     self.screen.blit(self.background, (0,0))
-                    #creates product and puts on primary screen, still have to figure out how it determines which product
-                    self.data["objects"][f"{app}"].new_image(self.data[f"{app}"]["size"]["width"], self.data[f"{app}"]["size"]["height"], "assets/fp_images/cooked_noodles.png", self.surface)
+                    self.data["objects"][f"{app}"].new_image(self.data[f"{app}"]["size"]["width"], self.data[f"{app}"]["size"]["height"], f"assets/fp_images/cooked_{image}.png", self.surface)
                     self.screen.blit(self.surface, (0,0))
-                    print("pan clicked")
+                    print(f"{app} clicked")
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

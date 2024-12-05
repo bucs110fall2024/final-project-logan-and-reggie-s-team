@@ -14,6 +14,7 @@ class Button():
         self.type = f"{object}"
         #if an ingreident goes first or second
         self.order = data[object]["order"]
+
   
     def click(self):
         state = False
