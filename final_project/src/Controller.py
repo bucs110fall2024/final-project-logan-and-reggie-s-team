@@ -42,7 +42,7 @@ class Controller():
             self.data["customer"]["act_pos"][f"{i}"].append(self.data["customer"]["rel_pos"][f"{i}"][0] * self.screen_width)
             self.data["customer"]["act_pos"][f"{i}"].append(self.data["customer"]["rel_pos"][f"{i}"][1] * self.screen_height)
 
-        self.state = "GAME"
+        self.state = "START"
 
     def mainloop(self):
        
