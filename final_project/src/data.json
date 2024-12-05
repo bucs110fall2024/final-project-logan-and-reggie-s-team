@@ -15,16 +15,16 @@
         "potato" : ""
     },
     "required" : {
-        "noodles" : "None",
+        "noodles" : "Empty",
         "vegetables" : "noodles",
-        "rice" : "None",
+        "rice" : "Empty",
         "eggs" : "rice",
-        "buns" : "None",
+        "buns" : "Empty",
         "patty" : "buns",
-        "bread" : "None",
+        "bread" : "Empty",
         "cheese" : "bread",
-        "tenders" : "None",
-        "potato" : "None"
+        "tenders" : "Empty",
+        "potato" : "Empty"
     },
     "clone_image" :{
         "panfood1" : [0, 0, 0, 0],
@@ -55,6 +55,7 @@
                     "noodles" : 0,
                     "vegetables" : 0
                 },
+                "cooked" : 0,
                 "image" : "assets/fp_images/cooked_noodles.png"
             },
             "fried_rice" : {
@@ -62,6 +63,7 @@
                     "rice" : 0,
                     "eggs" : 0
                 },
+                "cooked" : 0,
                 "image" : "assets/fp_images/cooked_rice.png"
             }
         }
@@ -82,6 +84,7 @@
                     "buns" : 0,
                     "patty" : 0
                 },
+                
                 "image" : "assets/fp_images/cooked_burger.png"
             },
             "grilled_cheese" : {
@@ -89,6 +92,7 @@
                     "bread" : 0,
                     "cheese" : 0
                 },
+                "cooked" : 0,
                 "image" : "assets/fp_images/cooked_grilled_cheese.png"
             }
         }
@@ -108,12 +112,14 @@
                 "ing" : {
                     "tenders" : 0
                 },
+                "cooked" : 0,
                 "image" : "assets/fp_images/cooked_tenders.png"
             },
             "fries" : {
                 "ing" : {
                     "potato" : 0
                 },
+                "cooked" : 0,
                 "image" : "assets/fp_images/cooked_fries.png"
             }
         }
