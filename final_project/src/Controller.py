@@ -2,19 +2,20 @@ import pygame
 import json
 from src.Button import Button
 from src.Customer import Customer
+from src.Timer import Timer
 
 class Controller():
 
     def __init__(self):
 
         # for later for full screen
-        dimensions = pygame.display.get_desktop_sizes()
-        self.screen_width = dimensions[0][0]*0.9
-        self.screen_height = dimensions[0][1]*0.9
+        # dimensions = pygame.display.get_desktop_sizes()
+        # self.screen_width = dimensions[0][0]*0.9
+        # self.screen_height = dimensions[0][1]*0.9
 
         #screen dimensiosn for now
-        # self.screen_width = 800
-        # self.screen_height = 450
+        self.screen_width = 800
+        self.screen_height = 450
 
         #creates screen surface and loads background
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
@@ -27,6 +28,7 @@ class Controller():
         self.objects = self.data["objects"]
         #list of customers
         self.customers = []
+        self.timers = []
         #uses objects scale to give them size and position relative to the screen
         for object in self.objects:
             self.data[object]["size"]["width"] = self.data[object]["size"]["scale"] * self.screen_width
@@ -40,7 +42,7 @@ class Controller():
             self.data["customer"]["act_pos"][f"{i}"].append(self.data["customer"]["rel_pos"][f"{i}"][0] * self.screen_width)
             self.data["customer"]["act_pos"][f"{i}"].append(self.data["customer"]["rel_pos"][f"{i}"][1] * self.screen_height)
 
-        self.state = "START"
+        self.state = "GAME"
 
     def mainloop(self):
        
@@ -76,11 +78,13 @@ class Controller():
         for object in self.objects:
             model = Button(self.data, object, self.screen)
             self.objects[f"{object}"] = model
-        #creats models for customers
+        #creates models for customers
         for i in range(1, 4):
             customer = Customer(self.data, i)
             self.customers.append(customer)
-        
+            timer = Timer()
+            self.timers.append(timer)
+     
         recipe = ""
         orders = []
 
@@ -96,8 +100,6 @@ class Controller():
                             self.data[app]["recipes"][self.data[food]["recipe"]]["ing"][food] = 1
                         self.objects[food].cook(self.data, self.objects[food].type, app, surface)
                         self.screen.blit(surface, (0,0))
-
-                        print(f"{food} clicked")
 
             #test if any of the appliances are clicked and have the required amount of ingredients
             for app in self.data["appliances"]:
@@ -122,21 +124,15 @@ class Controller():
                             recipe = f"{self.data[f"{app}_food"][-1]}"
                             self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][1]] = 0
 
-                        print(self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]])
-                        print(self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][1]])
-
-
                     #"serves" product
                     if self.data["objects"][app].available == "Full":
                         self.screen.blit(self.background, (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1]), (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1], self.data[app]["size"]["width"], self.data[app]["size"]["height"]))
                         self.data["objects"][app].available = "Empty"
                         
                         for i in range(1, 4):
-                            print(f"cooked_{recipe}{i}")
                             if f"cooked_{recipe}{i}" in orders:
                                 orders.remove(f"cooked_{recipe}{i}")
                                 break
-                        print(orders, recipe)
 
                         recipe = ""
 
@@ -149,26 +145,34 @@ class Controller():
                         self.screen.blit(surface, (0,0))
                         self.data["objects"][app].available = "Full"
                     
-
             for cus in self.customers:
                 #when no customer
                 if cus.waiting:
                     surface = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
                     surface.fill((0,0,0,0))
+                    cus.new_time()
                     cus.new_order()
                     cus.new_cus(surface)
                     self.screen.blit(surface, (0,0))
                     orders.append(f"{cus.order}{cus.num}")
 
-                #when customer is served
-                if not(f"{cus.order}{cus.num}" in orders) and not(cus.waiting):
+                #After customer is served
+                elif not(f"{cus.order}{cus.num}" in orders):
                     surface = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
                     surface.fill((0,0,0,0))
-                    self.screen.blit(self.background, (cus.order_x, cus.y), (cus.order_x, cus.y, cus.order_w + self.data["customer"]["size"]["width"], self.data["customer"]["size"]["height"]))    
-                    
-                    pygame.time.wait(500)
-                    cus.served()
-            
+                    self.screen.blit(self.background, (cus.order_x, cus.y), (cus.order_x, cus.y, cus.order_w + self.data["customer"]["size"]["width"], self.data["customer"]["size"]["height"]))
+                    self.timers[int(cus.num)-1].duration = cus.time_btwn_cus
+
+                    if not(self.timers[int(cus.num)-1].active) and not(self.timers[int(cus.num)-1].activated):
+                        self.timers[int(cus.num)-1].activate()
+
+                    elif not(self.timers[int(cus.num)-1].active) and self.timers[int(cus.num)-1].activated:
+                        print("works")
+                        self.timers[int(cus.num)-1].activated = False
+                        cus.served()
+                    else:
+                        self.timers[int(cus.num)-1].update()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
