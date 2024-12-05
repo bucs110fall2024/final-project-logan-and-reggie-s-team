@@ -8,13 +8,13 @@ class Controller():
     def __init__(self):
 
         # for later for full screen
-        # dimensions = pygame.display.get_desktop_sizes()
-        # self.screen_width = dimensions[0][0]
-        # self.screen_height = dimensions[0][1]
+        dimensions = pygame.display.get_desktop_sizes()
+        self.screen_width = dimensions[0][0]*0.9
+        self.screen_height = dimensions[0][1]*0.9
 
         #screen dimensiosn for now
-        self.screen_width = 800
-        self.screen_height = 450
+        # self.screen_width = 800
+        # self.screen_height = 450
 
         #creates screen surface and loads background
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
@@ -62,7 +62,6 @@ class Controller():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.state = "GAME"
-                        print(self.state)
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     exit()
@@ -165,7 +164,7 @@ class Controller():
                 if not(f"{cus.order}{cus.num}" in orders) and not(cus.waiting):
                     surface = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
                     surface.fill((0,0,0,0))
-                    self.screen.blit(self.background, (cus.order_x, cus.y), (cus.order_x, cus.y, self.data["customer"]["size"]["width"]*2, self.data["customer"]["size"]["height"]))    
+                    self.screen.blit(self.background, (cus.order_x, cus.y), (cus.order_x, cus.y, cus.order_w + self.data["customer"]["size"]["width"], self.data["customer"]["size"]["height"]))    
                     
                     pygame.time.wait(500)
                     cus.served()
