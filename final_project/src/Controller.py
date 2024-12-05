@@ -81,28 +81,29 @@ class Controller():
                     if self.objects[food].click():
                         surface = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
                         surface.fill((0,0,0,0))
+
+                        if self.data["required"][food] == self.data["objects"][app].available:
+                            self.data[app]["recipes"][self.data[food]["recipe"]]["ing"][food] = 1
+
                         self.objects[food].cook(self.data, self.objects[food].type, app, surface)
                         self.screen.blit(surface, (0,0))
-                        self.data[app]["recipes"][self.data[food]["recipe"]]["ing"][food] = 1
-                        print(self.data[app]["recipes"][self.data[food]["recipe"]]["ing"])
+
                         print(f"{food} clicked")
-                        #print(self.data["objects"][app].available)
 
             #test if any of the appliances are clicked and have the required amount of ingredients
             for app in self.data["appliances"]:
-                #recipe = ""
                 if self.data["objects"][app].click() and len(self.data["objects"][app].rect.collidelistall([self.data["clone_image"][f"{app}food1"], self.data["clone_image"][f"{app}food2"]])) == self.data[app]["ing_num"]:
                     
                     #if recipe has 2 ingredients
                     if self.data[app]["ing_num"] == 2:
                         if self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]] and self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][1]]:
                             recipe = f"{self.data[f"{app}_food"][-2]}"
+                            self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]] = 0
                             self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][1]] = 0
-                            self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][2]] = 0
                         elif self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][2]] and self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][3]]:
                             recipe = f"{self.data[f"{app}_food"][-1]}"
-                            self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][1]] = 0
                             self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][2]] = 0
+                            self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][3]] = 0
                     #if recipe has 1 ingredient
                     if self.data[app]["ing_num"] == 1:
                         if self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]]:
@@ -110,18 +111,23 @@ class Controller():
                             self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]] = 0
                         elif self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][1]]:
                             recipe = f"{self.data[f"{app}_food"][-1]}"
-                            self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]] = 0
-                
+                            self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][1]] = 0
+
+                        print(self.data[app]["recipes"][self.data[f"{app}_food"][-2]]["ing"][self.data[f"{app}_food"][0]])
+                        print(self.data[app]["recipes"][self.data[f"{app}_food"][-1]]["ing"][self.data[f"{app}_food"][1]])
+
+
                     #"serves" product
                     if self.data["objects"][app].available == "Full":
                         self.screen.blit(self.background, (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1]), (self.data[app]["act_pos"][0], self.data[app]["act_pos"][1], self.data[app]["size"]["width"], self.data[app]["size"]["height"]))
                         self.data["objects"][app].available = "Empty"
                         
                         for i in range(1, 4):
+                            print(f"cooked_{recipe}{i}")
                             if f"cooked_{recipe}{i}" in orders:
                                 orders.remove(f"cooked_{recipe}{i}")
                                 break
-                        print(orders)
+                        print(orders, recipe)
 
                         recipe = ""
 
@@ -150,15 +156,10 @@ class Controller():
                 if not(f"{cus.order}{cus.num}" in orders) and not(cus.waiting):
                     surface = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
                     surface.fill((0,0,0,0))
-                    self.screen.blit(self.background, (cus.order_x, cus.y), (cus.order_x, cus.y, self.data["customer"]["size"]["width"]*2, self.data["customer"]["size"]["height"]))
-
-                    #cus.clock.tick()
-                    pygame.time.wait(cus.time_btwn_cus)
+                    self.screen.blit(self.background, (cus.order_x, cus.y), (cus.order_x, cus.y, self.data["customer"]["size"]["width"]*2, self.data["customer"]["size"]["height"]))    
+                    
+                    pygame.time.wait(500)
                     cus.served()
-
-                # if cus.clock == cus.time_btwn_cus:
-                #     cus.served()
-                #     cus.clock = 0
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

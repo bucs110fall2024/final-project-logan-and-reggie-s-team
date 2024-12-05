@@ -263,5 +263,5 @@
             "3" : []
         }
     },
-    "order_images" : ["cooked_burger", "cooked_fried_rice", "cooked_fries", "cooked_grilled_cheese", "cooked_stir_fry", "cooked_tenders"]
+    "order_list" : ["cooked_burger", "cooked_fried_rice", "cooked_fries", "cooked_grilled_cheese", "cooked_stir_fry", "cooked_tenders"]
 }

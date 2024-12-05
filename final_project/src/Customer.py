@@ -12,15 +12,12 @@ class Customer():
         self.rect = pygame.Rect(self.x, self.y, data["customer"]["size"]["width"], data["customer"]["size"]["height"])
         self.waiting = True
         self.time_btwn_cus = 0
-        self.clock = pygame.time.Clock()
         self.customer_list = data["customer"]["image"]
-        #self.order = data["order_images"][random.randint(0, len(data["order_images"])-1)]
         self.order = ""
-        self.order_list = data["order_images"]
+        self.order_list = data["order_list"]
 
     def new_order(self):
         self.order = self.order_list[random.randint(0, len(self.order_list)-1)]
-
     def new_cus(self, screen):
         self.time_btwn_cus = random.randint(1, 4) * 1000
         self.waiting = False
