@@ -1,7 +1,7 @@
 
 :warning: Everything between << >> needs to be replaced (remove << >> after replacing)
 
-# << Project Title >>
+# Project Title: Restaurant Simulator
 ## CS110 Final Project Fall 2024
 
 ## Team Members
@@ -12,7 +12,7 @@ Reggie Juance
 
 ## Project Description
 
-The game will be a town building and farming simulator revolving around a restaurant. The ingredients collected can be used in the cooking-rush style gameplay, which is rewarded with money that can be used to continually upgrade the restaurant in all of its capabilities.
+The game will consist of varying ingredients andrecipes for the user to create, and must fulfill various orders asked by customers.
 
 ***    
 
@@ -31,23 +31,88 @@ The game will be a town building and farming simulator revolving around a restau
 Classes
     - Building: creates the buildings in the town
     - Button: create a button for building actions
+    - Customer: creates a customer and order
 
 ### Features
 
-1. Tutorial
-2. Collect Resources
-3. Cook with Resources
-4. Upgrade Features
-5. Currency
+1. Multiple Ingredients
+2. Variety in Recipes
+3. Variety in Appliances
+4. Customer Order
+5. Random Customer Order
 
 ### Classes
 
 - << You should have a list of each of your classes with a description >>
 
 ## ATP
+Test Case 1: Ingredient
+**Test Description:**  
+Verify that the player can click on an ingredient button, and the ingredient will be placed on the corresponding appliance.
 
-| Step                 |Procedure             |Expected Results                   |
-|----------------------|:--------------------:|----------------------------------:|
-|  1                   | Run Counter Program  |GUI window appears with count = 0  |
-|  2                   | click count button   | display changes to count = 1      |
-etc...
+**Test Steps:**
+1. Launch the game.
+2. Locate an ingredient button on the screen (e.g., "Vegetables").
+3. Click the ingredient button.
+4. Observe the pan (or other appliances where ingredient should go)
+5. Check that the clicked ingredient appears on the pan.
+6. Repeat the process with different ingredients 
+
+**Expected Outcome:**  
+When the player clicks on any ingredient button, the respective ingredient should appear on the pan or cooking area. Nothing should cause the ingredient to appear unless explicitly clicked.
+______________________________________________________________________________________________________________________________________________________________________________________________
+Test Case 2: Cooking
+**Test Description:**  
+Verify that the GUI updates after adding new ingredients.
+
+**Test Steps:**
+1. Launch the game.
+2. Follow a recipe that corresponds to a specific appliance.
+3. Click the first ingredient of a recipe.
+4. Click the second ingredient of the recipe.
+5. Make sure the ingredient behind disappears.
+
+**Expected Outcome**
+When the player clicks the next ingredient of the process, the ingredient behind should disappear and update with the next step  of the recipe.
+______________________________________________________________________________________________________________________________________________________________________________________________
+Test Case 3: Recipe Completion
+**Test Description:**  
+
+**Test Steps:**
+Verify that ingredients added in a specific order will be able to form to a completed meal.
+1. Launch the game.
+2. Follow a recipe that corresponds to a specific appliance.
+3. Click the first ingredient of a recipe.
+4. Click the second ingredient of the recipe.
+5. Click on the appliance.
+6. Make sure that the image updates with the correct corresponding completed meal.
+
+**Expected Outcome**
+When the player adds all the necessary ingredients, the ingredients should combine when clicking on the appliance with the completed meal.
+______________________________________________________________________________________________________________________________________________________________________________________________
+Test Case 4: Ingredients Out of Order
+**Test Description:**
+
+**Test Steps:**
+Verify that ingredients cannot be used out of order.
+1. Launch the game
+2. Press an ingredient that comes second in a recipe.
+3. Verify that nothing happens. (no screen update)
+
+**Expected Outcome**
+If a player clicks an ingredient that corresponds to the second step of a multi-step recipe, nothing will occur.
+______________________________________________________________________________________________________________________________________________________________________________________________
+Test Case 5: Customer Order
+**Test Description**
+Verify that a customer can receive an order.
+
+**Test Steps:**
+1. Launch the game.
+2. Follow a recipe that corresponds to a specific appliance.
+3. Click the first ingredient of a recipe.
+4. Click the second ingredient of the recipe.
+5. Click on the appliance.
+6. Click on the newly created completed dish.
+
+**Expected Outcome**
+The customer should disappear once their order is completely fulfilled.
