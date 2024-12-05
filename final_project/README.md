@@ -9,7 +9,7 @@ Reggie Juance
 
 ## Project Description
 
-The game will consist of varying ingredients andrecipes for the user to create, and must fulfill various orders asked by customers.
+The game will consist of varying ingredients and recipes for the user to create, and must fulfill various orders asked by customers.
 
 ***    
 
@@ -22,8 +22,7 @@ The game will consist of varying ingredients andrecipes for the user to create, 
 ### Final Design
 
 ![final gui](assets/finalgui.jpg)
-(assets/fp_images/start_screen.png)
-
+![final gui](assets/fp_images/start_screen.png)
 ## Program Design
 
 ### Features
@@ -37,6 +36,7 @@ The game will consist of varying ingredients andrecipes for the user to create, 
 ### Classes
     - Button: create a general button to be clicked
     - Customer: creates a customer and order
+    - Timer: Keeps track of time for customers to spawn
     
 ## ATP
 Test Case 1: Ingredient
