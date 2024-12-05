@@ -244,5 +244,19 @@
         "act_pos" : [],
         "order" : 1,
         "recipe" : "fries"
-    }
+    },
+    "customer" : {
+        "image" : ["cooked_patty", "egg_rice", "raw_patty", "uncooked_grilled_cheese", "uncooked_noodles"],
+        "rel_pos" : {
+            "1" : [0.3, 0.17],
+            "2" : [0.6, 0.17],
+            "3" : [0.9, 0.17]
+        },
+        "act_pos" : {
+            "1" : [],
+            "2" : [],
+            "3" : []
+        }
+    },
+    "order_images" : ["cooked_patty", "egg_rice", "raw_patty", "uncooked_grilled_cheese", "uncooked_noodles"]
 }

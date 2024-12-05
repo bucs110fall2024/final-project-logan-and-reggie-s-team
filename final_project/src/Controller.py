@@ -1,6 +1,7 @@
 import pygame
-from src.Button import Button
 import json
+from src.Button import Button
+from src.Customer import Customer
 
 class Controller():
 
@@ -22,27 +23,20 @@ class Controller():
         self.background = pygame.transform.scale(self.background, (self.screen_width, self.screen_height))
         self.screen.blit(self.background, (0,0))
 
-        
         #opens json file, dictionary of data is stored in self.data
         self.data_json = open("src/data.json", "r")
         self.data = json.loads(self.data_json.read())
         self.data_json.close()
         #list of ingredients and objects
         self.objects = self.data["objects"]
+        #list of customers
+        self.customers = []
         #ill clean this up later
         for object in self.objects:
             self.data[object]["size"]["width"] = self.data[object]["size"]["scale"] * self.screen_width
             self.data[object]["size"]["height"] = self.data[object]["size"]["scale"] * self.screen_height
             self.data[object]["act_pos"].append(self.data[object]["rel_pos"][0] * self.screen_width)
             self.data[object]["act_pos"].append(self.data[object]["rel_pos"][1] * self.screen_height)
-
-        #creates separate surface where ingredient copies and products are shown
-        # self.surfaces = {}
-        # for app in (self.data["appliances"]):
-        #     for _ in ["ingredients", "products"]:
-        #         surface = pygame.Surface((self.screen_width, self.screen_height))
-        #         surface.fill((0,0,0,0))
-        #         self.surfaces[f"{app}_" + _] = surface
 
         #state is kitchen
         self.state = "KITCHEN"
@@ -63,6 +57,9 @@ class Controller():
             model = Button(self.data, object, self.screen)
             self.objects[f"{object}"] = model
 
+        for i in range(1, 4):
+            customer = Customer(self.data, i)
+            self.customers.append(customer)
 
         while self.state == "KITCHEN":
             
