@@ -1,31 +1,12 @@
 {
-    "object_type" : ["noodles", "vegetables", "rice", "eggs", "pan"],
-    "indv_object" : {},
+    "objects" : {
+        "noodles" : "",
+        "vegetables" : "",
+        "pan" : ""
+    },
     "clone_image" :{
-        "pan1food1" : {
-            "rect" : [0, 0, 0, 0]
-        },
-        "pan1food2" : {
-            "rect" : [0, 0, 0, 0]
-        },
-        "pan2food1" : {
-            "rect" : [0, 0, 0, 0]
-        },
-        "pan2food2" : {
-            "rect" : [0, 0, 0, 0]
-        },
-        "pan3food1" : {
-            "rect" : [0, 0, 0, 0]
-        },
-        "pan3food2" : {
-            "rect" : [0, 0, 0, 0]
-        },
-        "pan4food1" : {
-            "rect" : [0, 0, 0, 0]
-        },
-        "pan4food2" : {
-            "rect" : [0, 0, 0, 0]
-        }
+        "panfood1" : [0, 0, 0, 0],
+        "panfood2" : [0, 0, 0, 0]
     },
     "noodles" : {
         "size" : {
@@ -34,10 +15,8 @@
             "height" : ""
         },
         "image" : "assets/fp_images/noodles.png",
-        "pos" : {
-            "1" : [400, 200]
-        },
-        "amount" : 1,
+        "rel_pos" : [0.7,0.75],
+        "act_pos" : [],
         "order" : 1
     },
     "vegetables" : {
@@ -47,10 +26,8 @@
             "height" : ""
         },
         "image" : "assets/fp_images/vegetables.png",
-        "pos" : {
-            "1" : [600, 200]
-        },
-        "amount" : 1,
+        "rel_pos" : [0.5, 0.9],
+        "act_pos" : [],
         "order" : 2
     },
     "rice" : {
@@ -60,10 +37,8 @@
             "height" : ""
         },
         "image" : "assets/fp_images/rice.png",
-        "pos" : {
-            "1" : [400, 100]
-        },
-        "amount" : 1,
+        "rel_pos" : [],
+        "act_pos" : [],
         "order" : 1
     },
     "eggs" : {
@@ -73,10 +48,8 @@
             "height" : ""
         },
         "image" : "assets/fp_images/eggs.png",
-        "pos" : {
-            "1" : [600, 100]
-        },
-        "amount" : 1,
+        "rel_pos" : [],
+        "act_pos" : [],
         "order" : 2
     },
     "plate" : {
@@ -86,10 +59,8 @@
             "height" : ""
         },
         "image" : "assets/fp_images/plate.png",
-        "pos" : {
-            "1" : [150, 200]
-        },
-        "amount" : 1,
+        "rel_pos" : [],
+        "act_pos" : [],
         "order" : "None"
     },
     "pan" : {
@@ -99,13 +70,8 @@
             "height" : ""
         },
         "image" : "assets/fp_images/pan.png",
-        "pos" : {
-            "1" : [50, 200],
-            "2" : [150, 200],
-            "3" : [50, 100],
-            "4" : [150, 100]
-        },
-        "amount" : 4,
+        "rel_pos" : [0.5, 0.6],
+        "act_pos" : [],
         "order" : "None"
     },
     
@@ -115,6 +81,5 @@
         "rice" : "None",
         "eggs" : "rice"
     },
-    "pan_food" : ["noodles1", "vegetables1", "rice1", "eggs1"],
-    "pans" : ["pan1", "pan2", "pan3", "pan4"]
+    "pan_food" : ["noodles", "vegetables"]
 }

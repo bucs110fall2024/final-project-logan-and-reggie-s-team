@@ -2,18 +2,14 @@ import pygame
 
 class Button():
 
-    def __init__(self, data, object, num, screen):
+    def __init__(self, data, object, surface):
         
-        self.image = pygame.image.load(data[object]["image"]).convert_alpha()
-        self.image = pygame.transform.scale(self.image, (data[object]["size"]["width"], data[object]["size"]["height"]))
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (data[object]["pos"][f"{num+1}"][0], data[object]["pos"][f"{num+1}"][1])
+        self.rect = pygame.Rect((data[object]["act_pos"][0], data[object]["act_pos"][1]),(data[object]["size"]["width"], data[object]["size"]["height"]))
         self.clicked = False
         self.available = "None"
         self.type = f"{object}"
         self.order = data[object]["order"]
-        screen.blit(self.image, (self.rect.x, self.rect.y))
-
+  
     def click(self):
         state = False
         pos = pygame.mouse.get_pos()
@@ -25,37 +21,22 @@ class Button():
             self.clicked = False
         return state
     
-    def new_image(self, topleft, width, height, image, surface):
-        self.clone_rect = self.image.get_rect()
-        self.clone_rect.topleft = topleft
-        self.clone_image = pygame.image.load(image)
+    
+    def new_image(self, width, height, image, surface):
+        self.clone_rect = self.rect
+        self.clone_image = pygame.image.load(image).convert_alpha()
         self.clone_image = pygame.transform.scale(self.clone_image, (width, height))
         surface.blit(self.clone_image, (self.clone_rect.x, self.clone_rect.y))
 
-        return {"rect" : self.clone_rect}
+        return self.clone_rect
                 
+    def cook(self, data, food, app, surface):
 
-    def cook(self, data, objects, food, app, surface):
-        if objects[f"{app}1"].available == data["required"][food]:
-            clone = objects[f"{app}1"].new_image(objects[f"{app}1"].rect.topleft, data[f"{app}"]["size"]["width"], data[f"{app}"]["size"]["height"], data[food]["image"], surface)
-            objects[f"{app}1"].available = f"{food}"
-            data["clone_image"][f"{app}1food{data[food]["order"]}"] = clone
+        if data["objects"][app].available == data["required"][food]:
+            clone = data["objects"][app].new_image(data[app]["size"]["width"], data[app]["size"]["height"], data[food]["image"], surface)
+            data["objects"][app].available = food
+            data["clone_image"][f"{app}food{data[food]["order"]}"] = clone
 
-        elif objects[f"{app}2"].available == data["required"][food]:
-            clone = objects[f"{app}2"].new_image(objects[f"{app}2"].rect.topleft, data[f"{app}"]["size"]["width"], data[f"{app}"]["size"]["height"], data[food]["image"], surface)
-            objects[f"{app}2"].available = f"{food}"
-            data["clone_image"][f"{app}2food{data[food]["order"]}"] = clone
-
-        elif objects[f"{app}3"].available == data["required"][food]:
-            clone = objects[f"{app}3"].new_image(objects[f"{app}3"].rect.topleft, data[f"{app}"]["size"]["width"], data[f"{app}"]["size"]["height"], data[food]["image"], surface)
-            objects[f"{app}3"].available = f"{food}"
-            data["clone_image"][f"{app}3food{data[food]["order"]}"] = clone
-
-        elif objects[f"{app}4"].available == data["required"][food]:
-            clone = objects[f"{app}4"].new_image(objects[f"{app}4"].rect.topleft, data[f"{app}"]["size"]["width"], data[f"{app}"]["size"]["height"], data[food]["image"], surface)
-            objects[f"{app}4"].available = f"{food}"
-            data["clone_image"][f"{app}4food{data[food]["order"]}"] = clone
-        
     def plate(self, data, app, surface):
         surface.set_alpha(0)
         
