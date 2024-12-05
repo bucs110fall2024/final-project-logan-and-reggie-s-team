@@ -18,7 +18,6 @@ class Controller():
 
         #creates screen surface and loads background
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
-        self.width, self.height = pygame.display.get_window_size()
         
         #opens json file, dictionary of data is stored in self.data
         self.data_json = open("src/data.json", "r")
@@ -28,7 +27,7 @@ class Controller():
         self.objects = self.data["objects"]
         #list of customers
         self.customers = []
-        #ill clean this up later
+        #uses objects scale to give them size and position relative to the screen
         for object in self.objects:
             self.data[object]["size"]["width"] = self.data[object]["size"]["scale"] * self.screen_width
             self.data[object]["size"]["height"] = self.data[object]["size"]["scale"] * self.screen_height
@@ -41,24 +40,24 @@ class Controller():
             self.data["customer"]["act_pos"][f"{i}"].append(self.data["customer"]["rel_pos"][f"{i}"][0] * self.screen_width)
             self.data["customer"]["act_pos"][f"{i}"].append(self.data["customer"]["rel_pos"][f"{i}"][1] * self.screen_height)
 
-        self.state = "MENU"
+        self.state = "START"
 
     def mainloop(self):
        
         while True:
-            if self.state == "MENU":
-                self.menuloop()
+            if self.state == "START":
+                self.startloop()
             elif self.state == "GAME":
                 self.gameloop()
         
-    def menuloop(self):
+    def startloop(self):
 
-        self.menu = pygame.image.load("assets/fp_images/start_screen.png")
-        self.menu = pygame.transform.scale(self.menu, (self.screen_width, self.screen_height))
-        self.screen.blit(self.menu, (0,0))
+        self.start_screen = pygame.image.load("assets/fp_images/start_screen.png")
+        self.start_screen = pygame.transform.scale(self.start_screen, (self.screen_width, self.screen_height))
+        self.screen.blit(self.start_screen, (0,0))
+        pygame.display.flip()
 
-        while self.state == "MENU":
-
+        while self.state == "START":
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
@@ -161,7 +160,6 @@ class Controller():
                     cus.new_cus(surface)
                     self.screen.blit(surface, (0,0))
                     orders.append(f"{cus.order}{cus.num}")
-                    print(cus.order)
 
                 #when customer is served
                 if not(f"{cus.order}{cus.num}" in orders) and not(cus.waiting):
@@ -173,10 +171,6 @@ class Controller():
                     cus.served()
             
             for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        self.state = "MENU"
-                        print(self.state)
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     exit()

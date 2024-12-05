@@ -18,6 +18,7 @@ class Customer():
 
     def new_order(self):
         self.order = self.order_list[random.randint(0, len(self.order_list)-1)]
+        
     def new_cus(self, screen):
         self.time_btwn_cus = random.randint(1, 4) * 1000
         self.waiting = False

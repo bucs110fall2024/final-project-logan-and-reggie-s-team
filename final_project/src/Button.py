@@ -29,7 +29,7 @@ class Button():
         return state
     
     def new_image(self, width, height, image, surface):
-        #creates new rectangle and surface for an image then puts it on the secondary screen
+        #creates new rectangle and surface for an image then puts it on screen
         self.clone_rect = self.rect
         self.clone_image = pygame.image.load(image)
         self.clone_image = pygame.transform.scale(self.clone_image, (width, height))
