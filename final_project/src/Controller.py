@@ -1,6 +1,5 @@
 import pygame
 import json
-import random
 from src.Button import Button
 from src.Customer import Customer
 
@@ -20,10 +19,7 @@ class Controller():
         #creates screen surface and loads background
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
         self.width, self.height = pygame.display.get_window_size()
-        self.background = pygame.image.load("assets/fp_images/background.png")
-        self.background = pygame.transform.scale(self.background, (self.screen_width, self.screen_height))
-        self.screen.blit(self.background, (0,0))
-
+        
         #opens json file, dictionary of data is stored in self.data
         self.data_json = open("src/data.json", "r")
         self.data = json.loads(self.data_json.read())
@@ -45,35 +41,52 @@ class Controller():
             self.data["customer"]["act_pos"][f"{i}"].append(self.data["customer"]["rel_pos"][f"{i}"][0] * self.screen_width)
             self.data["customer"]["act_pos"][f"{i}"].append(self.data["customer"]["rel_pos"][f"{i}"][1] * self.screen_height)
 
-
-        #state is kitchen
-        self.state = "KITCHEN"
+        self.state = "MENU"
 
     def mainloop(self):
        
-        #goes to kitchen loop
-        if self.state == "KITCHEN":
-            self.kitchenloop()
-        #idea is to go to pause menu where recipes are shown
-        elif self.state == "MENU":
-            self.menuloop()
+        while True:
+            if self.state == "MENU":
+                self.menuloop()
+            elif self.state == "GAME":
+                self.gameloop()
+        
+    def menuloop(self):
 
-    def kitchenloop(self):
+        self.menu = pygame.image.load("assets/fp_images/start_screen.png")
+        self.menu = pygame.transform.scale(self.menu, (self.screen_width, self.screen_height))
+        self.screen.blit(self.menu, (0,0))
+
+        while self.state == "MENU":
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.state = "GAME"
+                        print(self.state)
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
+
+    def gameloop(self):
+        
+        self.background = pygame.image.load("assets/fp_images/background.png")
+        self.background = pygame.transform.scale(self.background, (self.screen_width, self.screen_height))
+        self.screen.blit(self.background, (0,0))
 
         #creates a button for all of the ingredients and appliances and stores attributes in json file
         for object in self.objects:
             model = Button(self.data, object, self.screen)
             self.objects[f"{object}"] = model
-
+        #creats models for customers
         for i in range(1, 4):
             customer = Customer(self.data, i)
             self.customers.append(customer)
         
         recipe = ""
-
         orders = []
 
-        while self.state == "KITCHEN":
+        while self.state == "GAME":
             
             #tests if any of the pan ingredients are clicked then puts them on the pan
             for app in self.data["appliances"]:
@@ -81,10 +94,8 @@ class Controller():
                     if self.objects[food].click():
                         surface = pygame.Surface((self.screen_width, self.screen_height), pygame.SRCALPHA)
                         surface.fill((0,0,0,0))
-
                         if self.data["required"][food] == self.data["objects"][app].available:
                             self.data[app]["recipes"][self.data[food]["recipe"]]["ing"][food] = 1
-
                         self.objects[food].cook(self.data, self.objects[food].type, app, surface)
                         self.screen.blit(surface, (0,0))
 
@@ -162,6 +173,10 @@ class Controller():
                     cus.served()
             
             for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.state = "MENU"
+                        print(self.state)
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     exit()
