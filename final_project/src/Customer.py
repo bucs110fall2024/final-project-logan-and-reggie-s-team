@@ -1,31 +1,33 @@
 import pygame
+import random
 
 class Customer():
-    # def __init__(self, x, y, customerimg, orderimg):
-    #     self.x = x
-    #     self.y = y
-    #     self.image = pygame.image.load(customerimg)
-    #     self.order_image = pygame.image.load(orderimg)
-    #     self.order_state = "waiting"
-    # def neworder(self, screen):
-    #     order_x = self.x + (self.image.get_width() - self.order_image.get_width()) // 2  
-    #     order_y = self.y - self.order_image.get_height() - 10  
-    #     screen.blit(self.order_image, (order_x, order_y))
-    # def serve_order(self):
-    #     self.order_state = "served"  
-    # def is_served(self):
-    #     return self.order_state == "served"
+
     def __init__(self, data, customer_num):
-        self.x = data["customer"]["rel_pos"][f"{customer_num}"][0]
-        self.y = data["customer"]["rel_pos"][f"{customer_num}"][1]
-        self.rect = pygame.Rect()
-        self.order_state = "waiting"
-    def neworder(self, screen):
-        order_x = self.x + (self.image.get_width() - self.order_image.get_width()) // 2  
-        order_y = self.y - self.order_image.get_height() - 10  
-        screen.blit(self.order_image, (order_x, order_y))
-    def serve_order(self):
-        self.order_state = "served"  
-    def is_served(self):
-        return self.order_state == "served"
+        self.x = data["customer"]["act_pos"][f"{customer_num}"][0]
+        self.y = data["customer"]["act_pos"][f"{customer_num}"][1]
+        self.order_x = self.x - data["customer"]["size"]["width"]
+        self.order_y = self.y + data["customer"]["size"]["height"]/3
+        self.rect = pygame.Rect(self.x, self.y, data["customer"]["size"]["width"], data["customer"]["size"]["height"])
+        self.waiting = True
+        self.time_btwn_cus = 0
+        self.customer_list = data["customer"]["image"]
+        self.order_list = data["order_images"]
+        self.order = self.order_list[random.randint(0, len(self.order_list)-1)]
+
+    def new_cus(self, screen):
+        self.time_btwn_cus = random.randint(1, 4) * 1000
+        self.waiting = False
+        self.display(self.customer_list[random.randint(0, len(self.customer_list)-1)], screen, self.rect.x, self.rect.y)
+        self.display(self.order_list[random.randint(0, len(self.order_list)-1)], screen, self.order_x, self.order_y)
+
+    def display(self, image, surface, x, y):
+        self.image = pygame.image.load(f"assets/fp_images/{image}.png")
+        self.image = pygame.transform.scale(self.image, (self.rect.width,self.rect.height/3))
+        self.image_rect = pygame.Surface.get_rect(self.image)
+        surface.blit(self.image, (x, y))
+
+    def served(self):
+        self.waiting = True 
+   
         

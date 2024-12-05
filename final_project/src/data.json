@@ -246,11 +246,16 @@
         "recipe" : "fries"
     },
     "customer" : {
+        "size" : {
+            "scale" : [0.11, 0.33],
+            "width" : "",
+            "height" : ""
+        },
         "image" : ["cooked_patty", "egg_rice", "raw_patty", "uncooked_grilled_cheese", "uncooked_noodles"],
         "rel_pos" : {
-            "1" : [0.3, 0.17],
-            "2" : [0.6, 0.17],
-            "3" : [0.9, 0.17]
+            "1" : [0.15, 0.17],
+            "2" : [0.45, 0.17],
+            "3" : [0.75, 0.17]
         },
         "act_pos" : {
             "1" : [],
@@ -258,5 +263,5 @@
             "3" : []
         }
     },
-    "order_images" : ["cooked_patty", "egg_rice", "raw_patty", "uncooked_grilled_cheese", "uncooked_noodles"]
+    "order_images" : ["cooked_burger", "cooked_fried_rice", "cooked_fries", "cooked_grilled_cheese", "cooked_stir_fry", "cooked_tenders"]
 }
