@@ -95,7 +95,7 @@ class Controller():
 
        #creates a button for all of the ingredients and appliances and stores attributes in json file
        for object in self.objects:
-           model = Button(self.data, object, self.screen)
+           model = Button(self.data, object)
            self.objects[f"{object}"] = model
        #creates models for customers
        for i in range(1, 4):
