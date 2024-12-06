@@ -1,7 +1,7 @@
 import pygame
 
 class Button():
-    def __init__(self, data, object):
+    def __init__(self, data, object, surface):
         #creates rectangle
         self.rect = pygame.Rect((data[object]["act_pos"][0], data[object]["act_pos"][1]),(data[object]["size"]["width"], data[object]["size"]["height"]))
         #clicked state
